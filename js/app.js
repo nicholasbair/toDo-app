@@ -7,33 +7,72 @@ TODO:
 var taskInput = document.getElementById("new-task"), //new-task
     addButton = document.getElementsByTagName("button")[0], //first button
     incompleteTasksHolder = document.getElementById("incomplete-tasks"), //incomplete-tasks
-    completedTasksHolder= document.getElementById("completed-tasks"), //completed-tasks
+    completedTasksHolder = document.getElementById("completed-tasks"), //completed-tasks
     createNewTaskElement = function(taskString) {
-        //Create List Item
-        var listItem = document.createElement("li"),
-            checkBox = document.createElement("input"),
-            label = document.createElement("label"),
-            editInput = document.createElement("input"),
-            editButton = document.createElement("button"),
-            deleteButton = document.createElement("button");
+        //Testing exception handling, prevent creation of empty LI
+        switch (taskString) {
+            case (undefined):
+            case (null):
+            case (""):
+            case (" "):
+                throw new Error("Invalid user input");
+            default:
+                var listItem = document.createElement("li"),
+                    checkBox = document.createElement("input"),
+                    label = document.createElement("label"),
+                    editInput = document.createElement("input"),
+                    editButton = document.createElement("button"),
+                    deleteButton = document.createElement("button");
 
-        //Each element needs modifying
-      checkBox.type = "checkbox";
-      editInput.type = "text";
-      editButton.innerText = "Edit";
-      editButton.className = "edit";
-      deleteButton.innerText = "Delete";
-      deleteButton.className = "delete";
-      label.innerText = taskString;
+                //Each element needs modifying
+                checkBox.type = "checkbox";
+                editInput.type = "text";
+                editButton.innerText = "Edit";
+                editButton.className = "edit";
+                deleteButton.innerText = "Delete";
+                deleteButton.className = "delete";
+                label.innerText = taskString;
 
-      //Each element needs appending
-      listItem.appendChild(checkBox);
-      listItem.appendChild(label);
-      listItem.appendChild(editInput);
-      listItem.appendChild(editButton);
-      listItem.appendChild(deleteButton);
+                //Each element needs appending
+                listItem.appendChild(checkBox);
+                listItem.appendChild(label);
+                listItem.appendChild(editInput);
+                listItem.appendChild(editButton);
+                listItem.appendChild(deleteButton);
 
-      return listItem;
+                return listItem;
+        }
+
+
+        // if (taskString !== undefined && taskString !== null && taskString !== "") {
+        //     //Create List Item
+        //     var listItem = document.createElement("li"),
+        //         checkBox = document.createElement("input"),
+        //         label = document.createElement("label"),
+        //         editInput = document.createElement("input"),
+        //         editButton = document.createElement("button"),
+        //         deleteButton = document.createElement("button");
+        //
+        //     //Each element needs modifying
+        //     checkBox.type = "checkbox";
+        //     editInput.type = "text";
+        //     editButton.innerText = "Edit";
+        //     editButton.className = "edit";
+        //     deleteButton.innerText = "Delete";
+        //     deleteButton.className = "delete";
+        //     label.innerText = taskString;
+        //
+        //     //Each element needs appending
+        //     listItem.appendChild(checkBox);
+        //     listItem.appendChild(label);
+        //     listItem.appendChild(editInput);
+        //     listItem.appendChild(editButton);
+        //     listItem.appendChild(deleteButton);
+        //
+        //     return listItem;
+        //
+        // }
+
 },
 
 //Add a new task
