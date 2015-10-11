@@ -76,6 +76,19 @@ p > button:hover {
   color: #0FC57C;
 }
 
+/* Error for invalid entry */
+.newTaskError {
+    border: 1px solid #ff0000;
+}
+
+.newTaskErrorMessage {
+    display: none;
+}
+
+.newTaskErrorMessageDisplay {
+    color: #ff0000;
+}
+
 /* Task list */
 li {
   overflow: hidden;
