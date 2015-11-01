@@ -1,21 +1,16 @@
 /*
 TODO:
-    1. Display error message if user input invalid entry
-        a. Append error message to new-task label (.newTaskErrorMessage)
-        b. Format CSS w/ error class (newTaskError)
-        c. Remove changes when user types into field
-    2. When editing, change edit button to 'save'
+    1. Throw error if no text in field when user edit then click save
 */
 
-var taskInput = document.getElementById('new-task'), //new-task
-    addButton = document.getElementsByTagName('button')[0], //first button
-    incompleteTasksHolder = document.getElementById('incomplete-tasks'), //incomplete-tasks
-    completedTasksHolder = document.getElementById('completed-tasks'), //completed-tasks
+var taskInput = document.getElementById('new-task'),
+    addButton = document.getElementsByTagName('button')[0],
+    incompleteTasksHolder = document.getElementById('incomplete-tasks'),
+    completedTasksHolder = document.getElementById('completed-tasks'),
     newTaskError = function() {
         document.getElementById('newTaskErrorMessage').className = 'newTaskErrorMessageDisplay';
     },
     createNewTaskElement = function(taskString) {
-        //Testing exception handling, prevent creation of empty LI
         switch (taskString) {
             case (undefined):
             case (null):
@@ -24,6 +19,7 @@ var taskInput = document.getElementById('new-task'), //new-task
                 newTaskError();
                 break;
             default:
+                document.getElementById('newTaskErrorMessage').className = 'newTaskErrorMessage';
                 var listItem = document.createElement('li'),
                     checkBox = document.createElement('input'),
                     label = document.createElement('label'),
@@ -65,16 +61,19 @@ addTask = function() {
 //Edit an existing task
 editTask = function() {
   var listItem = this.parentNode,
-    editInput = listItem.querySelector('input[type=text'),
-    label = listItem.querySelector('label'),
+    editInput = listItem.querySelector('input[type=text]');
+    editButton = listItem.querySelector('button');
+    label = listItem.querySelector('label');
     containsClass = listItem.classList.contains('editMode');
   //if the class of the parent is .editMode
   if(containsClass) {
     //Switch from .editMode
     //label text become the input's value
     label.innerText = editInput.value;
+    editButton.innerText = 'Edit';
   } else {
     editInput.value = label.innerText;
+    editButton.innerText = 'Save';
   }
   listItem.classList.toggle('editMode');
 },
